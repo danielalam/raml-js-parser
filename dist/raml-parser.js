@@ -6999,6 +6999,9 @@
           case 'responses':
             this.validate_responses(property, allowParameterKeys);
             break;
+          case 'examples':
+            this.validate_responses(property, allowParameterKeys);
+            break;
           case 'baseUriParameters':
             if (!this.baseUri) {
               throw new exports.ValidationError('while validating uri parameters', null, 'base uri parameters defined when there is no baseUri', property[0].start_mark);
@@ -7280,6 +7283,17 @@
                 bodyMode = "implicit";
               }
               if (!util.isScalar(bodyProperty[1])) {
+                throw new exports.ValidationError('while validating body', null, "example must be a string", bodyProperty[0].start_mark);
+              }
+              break;
+            case "examples":
+              if (bodyMode && __indexOf.call(implicitMode, bodyMode) < 0) {
+                throw new exports.ValidationError('while validating body', null, "not compatible with explicit Media Type", bodyProperty[0].start_mark);
+              }
+              if (bodyMode == null) {
+                bodyMode = "implicit";
+              }
+              if (!util.isCollection(bodyProperty[1])) {
                 throw new exports.ValidationError('while validating body', null, "example must be a string", bodyProperty[0].start_mark);
               }
               break;
@@ -10950,6 +10964,8 @@ else {
     ['this',     'these'],
     ['that',     'those'],
     // Words ending in with a consonant and `o`.
+    ['echo', 'echoes'],
+    ['dingo', 'dingoes'],
     ['volcano', 'volcanoes'],
     ['tornado', 'tornadoes'],
     ['torpedo', 'torpedoes'],

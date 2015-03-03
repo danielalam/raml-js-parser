@@ -566,6 +566,9 @@ class @Validator
         when 'responses'
           @validate_responses property, allowParameterKeys
 
+        when 'examples'
+          @validate_responses property, allowParameterKeys
+
         when 'baseUriParameters'
           unless @baseUri
             throw new exports.ValidationError 'while validating uri parameters', null, 'base uri parameters defined when there is no baseUri', property[0].start_mark
@@ -755,6 +758,12 @@ class @Validator
               throw new exports.ValidationError 'while validating body', null, "not compatible with explicit Media Type", bodyProperty[0].start_mark
             bodyMode ?= "implicit"
             unless util.isScalar(bodyProperty[1])
+              throw new exports.ValidationError 'while validating body', null, "example must be a string", bodyProperty[0].start_mark
+          when "examples"
+            if bodyMode and bodyMode not in implicitMode
+              throw new exports.ValidationError 'while validating body', null, "not compatible with explicit Media Type", bodyProperty[0].start_mark
+            bodyMode ?= "implicit"
+            unless util.isCollection(bodyProperty[1])
               throw new exports.ValidationError 'while validating body', null, "example must be a string", bodyProperty[0].start_mark
           when "schema"
             if bodyMode and bodyMode not in implicitMode

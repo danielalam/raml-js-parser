@@ -617,6 +617,39 @@ describe('Validator', function () {
       });
     });
 
+    it('should allow multiple examples of the request as per RAML 1.0 spec', function (done) {
+      raml.load([
+        '#%RAML 0.8',
+        '---',
+        'title: Test',
+        'baseUri: http://myapi.org',
+        '/resource:',
+        '  post:',
+        '    body:',
+        '      application/json:',
+        '        examples:',
+        '          mobile: | ',
+        '            {"name": 1} ',
+      ].join('\n')).should.be.fulfilled.and.notify(done);
+    });
+
+    it('should allow multiple examples of the response body as per RAML 1.0 spec', function (done) {
+      raml.load([
+        '#%RAML 0.8',
+        '---',
+        'title: Test',
+        'baseUri: http://myapi.org',
+        '/resource:',
+        '  post:',
+        '    responses:',
+        '      200:',
+        '        body:',
+        '          application/json:',
+        '            examples:',
+        '              mobile: | ',
+        '                {"name": 1} ',
+      ].join('\n')).should.be.fulfilled.and.notify(done);
+    });
   });
 
   (function () {
