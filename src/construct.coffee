@@ -108,6 +108,8 @@ class @BaseConstructor
           node.start_mark, 'found unhashable key', key_node.start_mark
       else
         mapping[key] = value
+      if (node.end_mark && node.end_mark.name)
+        mapping.file = node.end_mark.name
     return mapping
 
   construct_pairs: (node) ->

@@ -1,0 +1,10 @@
+#%RAML 0.8
+#routes.yaml
+#transport routes
+  /card:
+    get:
+      description: Get all routes in card format.
+      responses:
+        200:
+          body:
+            application/json:
