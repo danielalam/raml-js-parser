@@ -380,7 +380,7 @@
         } else {
           mapping[key] = value;
         }
-        if ((key === 'resources' || key === 'methods') && node.start_mark && node.start_mark.name) {
+        if ((key === 'resources' || key === 'methods' || key === 'method') && node.start_mark && node.start_mark.name) {
           if (node.value && node.value[0] && node.value[0][0] && node.value[0][0].start_mark) {
             mapping.file = node.value[0][0].start_mark.name;
           } else {
