@@ -108,7 +108,8 @@ class @BaseConstructor
           node.start_mark, 'found unhashable key', key_node.start_mark
       else
         mapping[key] = value
-      if (node.start_mark && node.start_mark.name)
+      # Daniel: Passing source file name back to the tree
+      if ((key=='resources' || key == 'methods') && node.start_mark && node.start_mark.name)
         if (node.value && node.value[0] && node.value[0][0] && node.value[0][0].start_mark)
           mapping.file = node.value[0][0].start_mark.name
         else
