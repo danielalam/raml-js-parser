@@ -9,13 +9,7 @@ var definition = [
   '---',
   'title: Test',
   'baseUri: http://myapi.org',
-  '/resource:',
-  '  post:',
-  '    body:',
-  '      application/json:',
-  '        examples:',
-  '          mobile: | ',
-  '            {"name": 1} ',
+  '/resource: !include test-fl/test.yaml'
 ].join('\n');
 
 raml.load(definition).then( function(data) {
